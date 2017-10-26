@@ -1,0 +1,36 @@
+diff -r -u src/font.c src/font.c
+--- src/font.c
++++ src/font.c
+@@ -675,7 +675,7 @@
+     symbol_weight         = ID2SYM(rb_intern("weight"));
+     symbol_auto_fitting   = ID2SYM(rb_intern("auto_fitting"));
+ 
+-    cFontInfo = rb_struct_define( NULL, "gm_blackbox_x", "gm_blackbox_y", "gm_cellinc_x", "gmpt_glyphorigin_x", "gmpt_glyphorigin_y", "tm_ascent", "tm_descent", 0 );
++    cFontInfo = rb_struct_define( NULL, "gm_blackbox_x", "gm_blackbox_y", "gm_cellinc_x", "gmpt_glyphorigin_x", "gmpt_glyphorigin_y", "tm_ascent", "tm_descent", NULL );
+     rb_define_const( cFont, "FontInfo", cFontInfo );
+ 
+     vdefaultfont = Font_allocate( cFont );
+diff -r -u src/input.c src/input.c
+--- src/input.c
++++ src/input.c
+@@ -2495,7 +2495,7 @@
+     rb_define_const( mIME, "ATTR_TARGET_NOTCONVERTED"       , INT2FIX(ATTR_TARGET_NOTCONVERTED) );
+     rb_define_const( mIME, "ATTR_INPUT_ERROR"       , INT2FIX(ATTR_INPUT_ERROR) );
+ 
+-    cCompInfo = rb_struct_define( NULL, "comp_str", "comp_attr", "cursor_pos", "can_list", "selection", "selection_total", "page_size", "total", 0 );
++    cCompInfo = rb_struct_define( NULL, "comp_str", "comp_attr", "cursor_pos", "can_list", "selection", "selection_total", "page_size", "total", NULL );
+     rb_define_const( mIME, "CompInfo", cCompInfo );
+ 
+     {
+diff -r -u src/sound.c src/sound.c
+--- src/sound.c
++++ src/sound.c
+@@ -289,7 +289,7 @@
+         desc.llMemLength = (LONGLONG)RSTRING_LEN(vstr);      // バッファのサイズ
+         desc.pbMemData   = (LPBYTE)RSTRING_PTR(vstr);        // データの入っているバッファ
+ 
+-        hr = g_pDMLoader->lpVtbl->GetObject( g_pDMLoader, &desc, &IID_IDirectMusicSegment8, (void**)&sound->pDMSegment );
++        hr = g_pDMLoader->lpVtbl->_GetObject( g_pDMLoader, &desc, &IID_IDirectMusicSegment8, (void**)&sound->pDMSegment );
+     }
+ 
+     if( FAILED( hr ) )
