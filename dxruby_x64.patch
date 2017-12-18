@@ -22,15 +22,3 @@ diff -r -u src/input.c src/input.c
      rb_define_const( mIME, "CompInfo", cCompInfo );
  
      {
-diff -r -u src/sound.c src/sound.c
---- src/sound.c
-+++ src/sound.c
-@@ -289,7 +289,7 @@
-         desc.llMemLength = (LONGLONG)RSTRING_LEN(vstr);      // バッファのサイズ
-         desc.pbMemData   = (LPBYTE)RSTRING_PTR(vstr);        // データの入っているバッファ
- 
--        hr = g_pDMLoader->lpVtbl->GetObject( g_pDMLoader, &desc, &IID_IDirectMusicSegment8, (void**)&sound->pDMSegment );
-+        hr = g_pDMLoader->lpVtbl->_GetObject( g_pDMLoader, &desc, &IID_IDirectMusicSegment8, (void**)&sound->pDMSegment );
-     }
- 
-     if( FAILED( hr ) )
